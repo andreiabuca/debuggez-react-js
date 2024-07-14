@@ -15,8 +15,10 @@ const EventList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const filteredEvents = (
     (!type
+      // Affiche tous les événements
       ? data?.events
-      : data?.events) || []
+      // Filtrer les événements 
+      : data?.events.filter((event) => event.type === type)) || []
   ).filter((event, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
