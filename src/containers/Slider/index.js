@@ -8,11 +8,14 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    // Trier les images dans ordre décroissant 
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
+      // Ajout +1 à index pour suprimer l'élement non définer. 
+      // ajout ? --> vérifier que byDateDesc existe.
+      () => setIndex(index + 1 < byDateDesc?.length ? index + 1 : 0),
       5000
     );
   };
@@ -22,14 +25,13 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
-          <div
-            key={event.title}
-            className={`SlideCard SlideCard--${
+        // Chagement de key pour qu'elle soit unique pour chaque slide
+        <div key={event.date}>
+          <div className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
           >
-            <img src={event.cover} alt="forum" />
+            <img src={event.cover} alt={event.title} />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
                 <h3>{event.title}</h3>
@@ -42,15 +44,17 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                // key que corresponde à la slide en cours
+                  key={_.date}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  // Changer le idx par index pour indiquer la position de l'image
+                  checked={index === radioIdx}
                 />
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
