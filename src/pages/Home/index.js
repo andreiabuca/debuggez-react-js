@@ -13,7 +13,9 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const { data } = useData()
+  // récuperer le dernière évenement (prestation)
+  const last = data?.events.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date))[0];
   return <>
     <header>
       <Menu />
@@ -121,7 +123,8 @@ const Page = () => {
           title={last?.title}
           date={new Date(last?.date)}
           small
-          label="boom"
+          // affiche le nom correcte pour la prestation
+          label={last?.type}
         />
       </div>
       <div className="col contact">
