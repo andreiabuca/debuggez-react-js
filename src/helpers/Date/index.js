@@ -14,4 +14,4 @@ export const MONTHS = {
 };
 
 // Ajout +1 pour aficher le mois correct pcq tableau commence à 0 
-export const getMonth = (date) => MONTHS[date.getMonth(+1)];
+export const getMonth = (date) => MONTHS[date.getMonth() +1];
