@@ -50,6 +50,8 @@ const Slider = () => {
                   name="radio-button"
                   // Changer le idx par index pour indiquer la position de l'image
                   checked={index === radioIdx}
+                  // readOnly --> retirer console erreur 
+                  readOnly 
                 />
               ))}
             </div>
