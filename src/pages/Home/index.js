@@ -118,14 +118,18 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
-          small
-          // affiche le nom correcte pour la prestation
-          label={last?.type}
-        />
+        {/* s'assurer que `EventCard` ne se rend que si `last` et `last.cover` sont définis
+        pour éviter de passer des props indéfinies, ce qui provoquerait des avertissements et des problèmes potentiels */}
+        {last && last.cover && (
+          <EventCard
+            imageSrc={last?.cover}
+            title={last?.title}
+            date={new Date(last?.date)}
+            small
+            // affiche le nom correcte pour la prestation
+            label={last?.type}
+          />
+        )}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
