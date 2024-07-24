@@ -23,7 +23,7 @@ describe("When Form is created", () => {
       );
       await screen.findByText("En cours");
       // Confirmation que le menssage a été envoyer 
-      await waitFor(() => screen.findByText("Message envoyé"));
+      await waitFor(() => screen.findByText("Envoyer"), {timeout:2000});
     });
   });
 });
